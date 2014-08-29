@@ -1,11 +1,11 @@
 package fr.nimrod.info.trace.model.security;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;
 import fr.nimrod.info.trace.model.LoggingMessage;
+import fr.nimrod.info.trace.model.Message;
 
 /**
  * Une trace de securité est une trace permettant de suivre les actions d'une session utilisateur.
@@ -19,21 +19,13 @@ import fr.nimrod.info.trace.model.LoggingMessage;
  * @author x105723
  *
  */
-public class SecurityMessage implements LoggingMessage {
+public class SecurityMessage extends Message implements LoggingMessage {
 
 	private static final long serialVersionUID = 1L;
 
 	@Getter
 	@Setter
 	private UUID token;
-	
-	@Getter
-	@Setter
-	private LocalDateTime timestamp;
-	
-	@Getter
-	@Setter
-	private int typeTrace;
 		
 	@Getter
 	@Setter
