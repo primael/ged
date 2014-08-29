@@ -10,7 +10,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.nimrod.info</groupId>
-	<artifactId>trace-core</artifactId>
+	<artifactId>trace-const</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -19,12 +19,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.12.6</version>
-		</dependency>
-		<dependency>
-			<groupId>fr.nimrod.info</groupId>
-			<artifactId>trace-const</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>import</scope>
 		</dependency>
 	</dependencies>
 	

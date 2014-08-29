@@ -14,7 +14,7 @@ public interface AuthenticationService {
 
 	boolean authenticate(String login, String password);
 	
-	User createUser(String login, String password);
+	User createUser(String login, String eMail, String password);
 
 	static AuthenticationService getService(){
 		return AuthenticationServiceImplementation.INSTANCE;

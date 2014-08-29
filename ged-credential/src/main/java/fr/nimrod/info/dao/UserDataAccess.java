@@ -1,5 +1,6 @@
 package fr.nimrod.info.dao;
 
+import fr.nimrod.info.dao.impl.UserDataAccessImplementation;
 import fr.nimrod.info.model.User;
 
 public interface UserDataAccess {
@@ -9,7 +10,7 @@ public interface UserDataAccess {
 	User findUserByLogin(String login);
 	
 	static UserDataAccess getDataAccess(){
-		return null;
+		return UserDataAccessImplementation.INSTANCE;
 	}
 	
 }

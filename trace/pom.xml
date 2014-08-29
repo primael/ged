@@ -9,6 +9,7 @@
 
 	<modules>
 		<module>trace-core</module>
+		<module>trace-const</module>
   	</modules>
 
 	<dependencies>

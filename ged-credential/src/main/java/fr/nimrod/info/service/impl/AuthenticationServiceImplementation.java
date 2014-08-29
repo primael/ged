@@ -51,7 +51,7 @@ public enum AuthenticationServiceImplementation implements AuthenticationService
 
 	@Override
 	@SneakyThrows
-	public User createUser(String login, String password) {
+	public User createUser(String login, String eMail, String password) {
 		// FIXME ajouter des contrôles de format?
 		if (login != null && password != null) {
 			try {
@@ -63,7 +63,7 @@ public enum AuthenticationServiceImplementation implements AuthenticationService
 				String stringDigest = byteToBase64(byteDigest);
 				String stringSalt = byteToBase64(byteSalt);
 				
-				return new User(login, "", password.toCharArray() , stringSalt, stringDigest);
+				return new User(login, eMail, password.toCharArray() , stringSalt, stringDigest);
 			} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				throw new Exception();

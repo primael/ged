@@ -25,10 +25,12 @@ public abstract class MessageBuilder {
 
 	public MessageBuilder with(ElementOperation elementOperation,
 			Object... values) {
-		checkKey(values[0], elementOperation);
 
 		String temporaryValue = elementOperation.getElementValidator()
 				.validateAndTransform(values);
+		
+		checkKey(temporaryValue, elementOperation);
+		
 		elements.put(elementOperation.getCle(),
 				elementOperation.getValeur(temporaryValue).toString());
 
@@ -38,7 +40,7 @@ public abstract class MessageBuilder {
 	public String getMessage() {
 		return this.generateMessage(' ');
 	}
-	
+
 	abstract protected int getTypeTrace();
 
 	private void checkKey(Object valeur, ElementOperation elementOperation) {
@@ -71,8 +73,8 @@ public abstract class MessageBuilder {
 
 	private enum CompulsorySecurityOperations implements ElementOperation {
 
-		TYPETRACE("type_trace", IntegerValidator.INSTANCE),
-		TIMESTAMP("date_creation", TimeStampValidator.INSTANCE);
+		TYPETRACE("type_trace", IntegerValidator.INSTANCE), TIMESTAMP(
+				"date_creation", TimeStampValidator.INSTANCE);
 
 		private final String cle;
 		private final ElementValidator<?> elementValidator;

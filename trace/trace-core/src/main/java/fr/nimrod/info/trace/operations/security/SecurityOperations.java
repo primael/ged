@@ -3,10 +3,12 @@ package fr.nimrod.info.trace.operations.security;
 import fr.nimrod.info.trace.operations.ElementOperation;
 import fr.nimrod.info.trace.validator.ElementValidator;
 import fr.nimrod.info.trace.validator.common.TokenValidator;
+import fr.nimrod.info.trace.validator.security.SecurityEventValidator;
 
 public enum SecurityOperations implements ElementOperation{
 
-	TOKEN("token", TokenValidator.INSTANCE);
+	TOKEN("token", TokenValidator.INSTANCE),
+	SECURITY_EVENT("security_event", SecurityEventValidator.INSTANCE);
 	
 	private final String cle;
 	private final ElementValidator<?> elementValidator;

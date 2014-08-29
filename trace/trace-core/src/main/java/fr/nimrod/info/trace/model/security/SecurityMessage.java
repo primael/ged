@@ -16,7 +16,7 @@ import fr.nimrod.info.trace.model.Message;
  * 	<li>un identifiant. Permettant d'identifier l'utilisateur.</li>
  * 	<li>une action. Permettant d'identifier l'action effectuée.</li>
  * </ul>
- * @author x105723
+ * @author Primaël BRUANT
  *
  */
 public class SecurityMessage extends Message implements LoggingMessage {
