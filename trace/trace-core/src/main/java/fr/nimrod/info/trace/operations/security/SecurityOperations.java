@@ -2,13 +2,11 @@ package fr.nimrod.info.trace.operations.security;
 
 import fr.nimrod.info.trace.operations.ElementOperation;
 import fr.nimrod.info.trace.validator.ElementValidator;
-import fr.nimrod.info.trace.validator.common.TimeStampValidator;
 import fr.nimrod.info.trace.validator.common.TokenValidator;
 
 public enum SecurityOperations implements ElementOperation{
 
-	TOKEN("token", TokenValidator.INSTANCE),
-	TIMESTAMP("date_creation", TimeStampValidator.INSTANCE);
+	TOKEN("token", TokenValidator.INSTANCE);
 	
 	private final String cle;
 	private final ElementValidator<?> elementValidator;

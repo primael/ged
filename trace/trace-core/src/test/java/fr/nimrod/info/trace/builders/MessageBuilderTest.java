@@ -1,6 +1,5 @@
 package fr.nimrod.info.trace.builders;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.junit.Test;
@@ -15,13 +14,11 @@ public class MessageBuilderTest {
 		MessageBuilder messageBuilder = new SecurityMessageBuilder();
 		
 		messageBuilder //
-			.with(SecurityOperations.TOKEN, UUID.randomUUID()) //
-			.with(SecurityOperations.TIMESTAMP, LocalDateTime.now());
+			.with(SecurityOperations.TOKEN, UUID.randomUUID());
 		
 		String message = messageBuilder.getMessage();
 		
 		System.out.println(message);
-		
 		
 	}
 }
