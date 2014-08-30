@@ -10,7 +10,6 @@
 	<modules>
 		<module>trace</module>
 		<module>ged-core</module>
-		<module>ged-credential</module>
   	</modules>
 
 	<dependencies>

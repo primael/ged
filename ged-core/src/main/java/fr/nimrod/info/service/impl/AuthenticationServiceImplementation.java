@@ -9,6 +9,10 @@ import lombok.SneakyThrows;
 import fr.nimrod.info.dao.UserDataAccess;
 import fr.nimrod.info.model.User;
 import fr.nimrod.info.service.AuthenticationService;
+import fr.nimrod.info.trace.builders.MessageBuilder;
+import fr.nimrod.info.trace.builders.security.SecurityMessageBuilder;
+import fr.nimrod.info.trace.evenement.SecurityEvent;
+import fr.nimrod.info.trace.operations.security.SecurityOperations;
 
 public enum AuthenticationServiceImplementation implements AuthenticationService {
 
@@ -19,6 +23,9 @@ public enum AuthenticationServiceImplementation implements AuthenticationService
 	@Override
 	@SneakyThrows
 	public boolean authenticate(String login, String password) {
+		MessageBuilder builder = new SecurityMessageBuilder();
+		builder.with(SecurityOperations.SECURITY_EVENT, SecurityEvent.TRY_AUTHENTICATION);
+		System.out.println(builder.getMessage());
 		try {
 			boolean userExist = true;
 
@@ -44,6 +51,7 @@ public enum AuthenticationServiceImplementation implements AuthenticationService
 
 			return Arrays.equals(proposedDigest, byteDigest) && userExist;
 		} catch (UnsupportedEncodingException | NoSuchAlgorithmException exception) {
+			System.err.println(exception);
 			// Erreur lors du hash
 			throw new Exception();
 		}
