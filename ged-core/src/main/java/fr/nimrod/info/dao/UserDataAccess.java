@@ -3,7 +3,7 @@ package fr.nimrod.info.dao;
 import fr.nimrod.info.dao.impl.UserDataAccessImplementation;
 import fr.nimrod.info.model.User;
 
-public interface UserDataAccess {
+public interface UserDataAccess extends DataAccessObject<Long, User>{
 
 	void persistUser();
 	

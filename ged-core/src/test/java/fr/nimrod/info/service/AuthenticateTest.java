@@ -4,6 +4,8 @@ package fr.nimrod.info.service;
 import org.junit.Assert;
 import org.junit.Test;
 
+import fr.nimrod.info.exception.security.GedSecurityAuthenticationFailedException;
+
 public class AuthenticateTest {
 
 	@Test
@@ -13,8 +15,11 @@ public class AuthenticateTest {
 	
 	@Test
 	public void goodAuthenticate(){
-		//User utilisateur = AuthenticationService.getService().createUser("primael", "aqwzsx123");
-		
-		AuthenticationService.getService().authenticate("primael", "aqwzsx123");
+		try {
+			AuthenticationService.getService().authenticate("primael", "aqwzsx123");
+		} catch (GedSecurityAuthenticationFailedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

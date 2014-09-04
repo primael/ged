@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import lombok.SneakyThrows;
 import fr.nimrod.info.dao.UserDataAccess;
+import fr.nimrod.info.exception.security.GedSecurityAuthenticationFailedException;
 import fr.nimrod.info.model.User;
 import fr.nimrod.info.service.AuthenticationService;
 import fr.nimrod.info.trace.builders.MessageBuilder;
@@ -22,7 +23,7 @@ public enum AuthenticationServiceImplementation implements AuthenticationService
 
 	@Override
 	@SneakyThrows
-	public boolean authenticate(String login, String password) {
+	public void authenticate(String login, String password) {
 		MessageBuilder builder = new SecurityMessageBuilder();
 		builder.with(SecurityOperations.SECURITY_EVENT, SecurityEvent.TRY_AUTHENTICATION);
 		System.out.println(builder.getMessage());
@@ -49,7 +50,9 @@ public enum AuthenticationServiceImplementation implements AuthenticationService
 
 			byte[] proposedDigest = getHash(ITERATION_NUMBER, password, byteSalt);
 
-			return Arrays.equals(proposedDigest, byteDigest) && userExist;
+			if(!( Arrays.equals(proposedDigest, byteDigest) && userExist)){
+				throw new GedSecurityAuthenticationFailedException();
+			}
 		} catch (UnsupportedEncodingException | NoSuchAlgorithmException exception) {
 			System.err.println(exception);
 			// Erreur lors du hash

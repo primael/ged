@@ -7,12 +7,14 @@ import java.util.Base64;
 
 
 
+
+import fr.nimrod.info.exception.security.GedSecurityAuthenticationFailedException;
 import fr.nimrod.info.model.User;
 import fr.nimrod.info.service.impl.AuthenticationServiceImplementation;
 
 public interface AuthenticationService {
 
-	boolean authenticate(String login, String password);
+	void authenticate(String login, String password) throws GedSecurityAuthenticationFailedException;
 	
 	User createUser(String login, String eMail, String password);
 
