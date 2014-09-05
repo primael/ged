@@ -1,5 +1,7 @@
 package fr.nimrod.info.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -40,6 +42,15 @@ public interface DataAccessObject<PK, E> {
 		return getEntityManager().find(getClassObject(), id);
 	}
 	
+	@SuppressWarnings("unchecked")
+	default List<E> readAllEntity(){
+		@Cleanup
+		EntityManager entityManager = FACTORY.createEntityManager();
+		System.out.println("Select e From " + getClassObject().getSimpleName() + " e");
+		Query query = entityManager.createQuery("Select e From " + getClassObject().getSimpleName() + " e");
+		return query.getResultList();
+	}
+	
 	default E updateEntity(E entity){
 		getEntityManager().getTransaction().begin();
 		entity = getEntityManager().merge(entity);
@@ -57,3 +68,4 @@ public interface DataAccessObject<PK, E> {
 		return getEntityManager().createQuery(jpql);
 	}
 }
+ 

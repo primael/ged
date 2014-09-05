@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +25,7 @@ import lombok.ToString;
 @Entity
 @Table(name="utilisateur")
 @ToString
+@EqualsAndHashCode
 public class User {
 
 	public User(String login, String email, char[] password, String salt,
@@ -38,7 +40,7 @@ public class User {
 	@Getter
 	@Setter
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long identifiant;
 	
 	@Getter
@@ -59,10 +61,10 @@ public class User {
 	@Getter
 	@Setter
 	@Column(nullable=false)
-	private transient String salt;
+	private String salt;
 	
 	@Getter
 	@Setter
 	@Column(nullable=false)
-	private transient String hash;
+	private String hash;
 }
