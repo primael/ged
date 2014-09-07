@@ -30,9 +30,9 @@ Vous devez dans un premier temps déclarer dans votre test le @Rule Junit4:
 
 Ensuite sur vos méthode de test, ajouter les annotations :
 
- - @Schema => Pour l'éxecution d'un script
- - @Data => Pour l'insertion d'un jeu de données (supporte actuellement le format JSON et XML)
- - @ExpectedData => Pour la vérification entre les données obtenues et les données attendues.
+ - [@Schema](#schema) => Pour l'éxecution d'un script
+ - [@Data](#data) => Pour l'insertion d'un jeu de données (supporte actuellement le format JSON et XML)
+ - [@DataExpected](#dataExpected) => Pour la vérification entre les données obtenues et les données attendues.
  
 @Schema
 -------
@@ -46,11 +46,19 @@ Annotation permettant l'import d'un script sql (ie. la création d'une table)
 @Data
 -----
  
- Annation permettant l'ajout de données.
+ Annotation permettant l'ajout de données.
  
- ```java
+```java
  	@Data({"utilisateur.xml", "role.json"})
 ```
  Actuellement seul les formats json et xml sont supportés.
  
+ @DataExpected
+ -------------
+ 
+ Annotation permettant de valider la bonne modification des données.
+ ```java
+ 	@DataExpected(file="/user-expected.json", tableName="utilisateur", orderBy="identifiant", ignoredColumn={"hash","salt"} )
+```
+
 Lancer votre test, that's it!
