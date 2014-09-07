@@ -34,8 +34,7 @@ Ensuite sur vos méthode de test, ajouter les annotations :
  - [@Data](#data) => Pour l'insertion d'un jeu de données (supporte actuellement le format JSON et XML)
  - @DataExpected => Pour la vérification entre les données obtenues et les données attendues.
  
-@Schema
--------
+# @Schema #
  
 Annotation permettant l'import d'un script sql (ie. la création d'une table)
  
@@ -43,8 +42,7 @@ Annotation permettant l'import d'un script sql (ie. la création d'une table)
  	@Schema({"utilisateur.sql", "role.sql"})
 ```
  
-@Data
------
+# @Data #
  
  Annotation permettant l'ajout de données.
  
@@ -53,10 +51,10 @@ Annotation permettant l'import d'un script sql (ie. la création d'une table)
 ```
  Actuellement seul les formats json et xml sont supportés.
  
- @DataExpected
- -------------
+# @DataExpected #
  
- Annotation permettant de valider la bonne modification des données.
+Annotation permettant de valider la bonne modification des données.
+ 
  ```java
  	@DataExpected(file="/user-expected.json", tableName="utilisateur", orderBy="identifiant", ignoredColumn={"hash","salt"} )
 ```
