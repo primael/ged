@@ -32,7 +32,7 @@ Ensuite sur vos méthode de test, ajouter les annotations :
 
  - [@Schema](#schema) => Pour l'éxecution d'un script
  - [@Data](#data) => Pour l'insertion d'un jeu de données (supporte actuellement le format JSON et XML)
- - [@DataExpected](#dataExpected) => Pour la vérification entre les données obtenues et les données attendues.
+ - @DataExpected => Pour la vérification entre les données obtenues et les données attendues.
  
 @Schema
 -------
