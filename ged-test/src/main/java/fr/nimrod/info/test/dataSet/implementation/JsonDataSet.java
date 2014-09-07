@@ -1,4 +1,4 @@
-package fr.nimrod.info.config;
+package fr.nimrod.info.test.dataSet.implementation;
 
 import org.codehaus.jackson.map.ObjectMapper;
 

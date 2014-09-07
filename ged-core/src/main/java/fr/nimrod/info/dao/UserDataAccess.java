@@ -13,4 +13,8 @@ public interface UserDataAccess extends DataAccessObject<Long, User>{
 		return UserDataAccessImplementation.INSTANCE;
 	}
 	
+	default String getTypeEntity() {
+		return User.class.getSimpleName();
+	}
+	
 }

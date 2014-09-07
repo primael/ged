@@ -1,22 +1,18 @@
 package fr.nimrod.info.service;
 
-import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-
-
-
-import fr.nimrod.info.exception.security.GedSecurityAuthenticationFailedException;
+import fr.nimrod.info.exception.GedException;
+import fr.nimrod.info.exception.technical.GedTechnicalException;
 import fr.nimrod.info.model.User;
 import fr.nimrod.info.service.impl.AuthenticationServiceImplementation;
 
 public interface AuthenticationService {
 
-	void authenticate(String login, String password) throws GedSecurityAuthenticationFailedException;
+	void authenticate(String login, String password) throws GedException;
 	
-	User createUser(String login, String eMail, String password);
+	User createUser(String login, String eMail, String password) throws GedException;
 
 	static AuthenticationService getService(){
 		return AuthenticationServiceImplementation.INSTANCE;
@@ -31,7 +27,8 @@ public interface AuthenticationService {
 	}
 
 
-	default byte[] getHash(int iterationNb, String password, byte[] salt) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	default byte[] getHash(int iterationNb, String password, byte[] salt) throws GedException {
+		try {
 		MessageDigest digest = MessageDigest.getInstance("SHA-1");
 		digest.reset(); 
 		digest.update(salt);
@@ -41,5 +38,8 @@ public interface AuthenticationService {
 			input = digest.digest(input);
 		}
 		return input;
+		} catch (Exception exception) {
+			throw new GedTechnicalException();
+		}
 	}
 }

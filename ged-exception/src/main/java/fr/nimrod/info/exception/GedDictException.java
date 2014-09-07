@@ -7,7 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor(access=AccessLevel.PRIVATE)
 public enum GedDictException {
 
-	AUTHENTICATIONFAILED(100, "Erreur dans le couple login/mot de passe.")
+	AUTHENTICATIONFAILED(100, "Erreur dans le couple login/mot de passe."),
+	
+	TECHNICAL(200, "Erreur technique survenue. Contactez l'administrateur.")
 	;
 	
 	@Getter

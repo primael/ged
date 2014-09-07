@@ -9,11 +9,14 @@ import javax.persistence.Query;
 
 import lombok.Cleanup;
 
+@FunctionalInterface
 public interface DataAccessObject<PK, E> {
 
 	public static final String ENTITY_NAME = "ged-core";
 	
 	public static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory(ENTITY_NAME);
+	
+	String getTypeEntity();
 	
 	default EntityManager getEntityManager(){
 		return FACTORY.createEntityManager();
@@ -46,8 +49,8 @@ public interface DataAccessObject<PK, E> {
 	default List<E> readAllEntity(){
 		@Cleanup
 		EntityManager entityManager = FACTORY.createEntityManager();
-		System.out.println("Select e From " + getClassObject().getSimpleName() + " e");
-		Query query = entityManager.createQuery("Select e From " + getClassObject().getSimpleName() + " e");
+		System.out.println("Select e From " + getTypeEntity() + " e");
+		Query query = entityManager.createQuery("Select e From " + getTypeEntity() + " e");
 		return query.getResultList();
 	}
 	

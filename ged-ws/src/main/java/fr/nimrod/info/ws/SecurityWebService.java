@@ -9,6 +9,7 @@ import fr.nimrod.info.exception.GedException;
 import fr.nimrod.info.service.AuthenticationService;
 import fr.nimrod.info.ws.question.security.impl.GedSecurityAuthenticationQuestion;
 import fr.nimrod.info.ws.response.GedResponse;
+import fr.nimrod.info.ws.response.security.impl.GedCreateAuthenticationResponse;
 import fr.nimrod.info.ws.response.security.impl.GedSecurityAuthenticationResponse;
 
 @WebService
@@ -30,9 +31,17 @@ public class SecurityWebService {
 		return response;
 	}
 
-	public void createUser(@WebParam String login, @WebParam String mail,
+	public GedResponse createUser(@WebParam String login, @WebParam String mail,
 			@WebParam String password) {
 
-		service.createUser(login, mail, password);
+		GedResponse response = new GedCreateAuthenticationResponse();
+		
+		try {
+			service.createUser(login, mail, password);
+		} catch (GedException exception) {
+			response.addException(exception);
+		}
+		
+		return response;
 	}
 }

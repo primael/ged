@@ -9,6 +9,7 @@
 
 	<modules>
 		<module>trace</module>
+		<module>ged-test</module>
 		<module>ged-exception</module>
 		<module>ged-core</module>
 		<module>ged-ws</module>
@@ -26,6 +27,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.12.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.0.2</version>
 		</dependency>
 	</dependencies>
 </project>
