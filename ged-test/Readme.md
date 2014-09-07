@@ -1,7 +1,7 @@
 DbUnitTest
 ==========
-Par Primaël BRUANT
-Version au 07/09/2014
+Par Primaël BRUANT.
+Version au 07/09/2014.
 Ce document présente la façon d'utiliser __DbUnitTest__ pour gérer et créer des tests. 
 
 Installation avec maven
