@@ -11,11 +11,6 @@ public enum UserDataAccessImplementation implements UserDataAccess {
 
 	INSTANCE;
 
-	@Override
-	public void persistUser() {
-	
-	}
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public User findUserByLogin(String login) {

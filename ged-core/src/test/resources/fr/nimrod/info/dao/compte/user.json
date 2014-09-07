@@ -1,0 +1,12 @@
+{
+  "utilisateur":
+      [
+        {
+          "identifiant": 1,
+          "login": "Nimrod",
+          "email": "primael@nimrod-info.fr",
+          "salt": "XNv44yasUQ0=",
+          "hash": "JqhITW+SURu6tNbhxa7GE7uzXeQ="
+        }
+      ]
+}

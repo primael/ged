@@ -6,7 +6,7 @@ import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
 
 import fr.nimrod.info.exception.GedException;
-import fr.nimrod.info.service.AuthenticationService;
+import fr.nimrod.info.service.UserService;
 import fr.nimrod.info.ws.question.security.impl.GedSecurityAuthenticationQuestion;
 import fr.nimrod.info.ws.response.GedResponse;
 import fr.nimrod.info.ws.response.security.impl.GedCreateAuthenticationResponse;
@@ -16,7 +16,7 @@ import fr.nimrod.info.ws.response.security.impl.GedSecurityAuthenticationRespons
 @SOAPBinding(style = Style.RPC)
 public class SecurityWebService {
 
-	private AuthenticationService service = AuthenticationService.getService();
+	private UserService service = UserService.getService();
 
 	public GedResponse authentication(
 			@WebParam GedSecurityAuthenticationQuestion question) {

@@ -1,0 +1,26 @@
+{
+  "utilisateur":
+      [
+        {
+          "identifiant": 1,
+          "login": "Nimrod",
+          "email": "primael@nimrod-info.fr",
+          "salt": "XNv44yasUQ0=",
+          "hash": "JqhITW+SURu6tNbhxa7GE7uzXeQ="
+        },
+        {
+          "identifiant": 2,
+          "login": "l-infini",
+          "email": "primael@l-infini.fr",
+          "salt": "1c4j4ACmchA=",
+          "hash": "5KtC1hCScIF+F7xpa2fCeDWzpcc="
+        },
+         {
+          "identifiant": 3,
+          "login": "primael",
+          "email": "primaelbruant@gmail.com",
+          "salt": "1c4j4ACmchA=",
+          "hash": "5KtC1hCScIF+F7xpa2fCeDWzpcc="
+        }
+      ]
+}

@@ -11,4 +11,11 @@ public class GedTechnicalException extends GedException {
 		this.setCodeRetour(GedDictException.TECHNICAL.getCodeRetour());
 		this.setMessage(GedDictException.TECHNICAL.getMessage());
 	}
+	
+	public GedTechnicalException(Exception exception) {
+		this.setCodeRetour(GedDictException.TECHNICAL.getCodeRetour());
+		this.setMessage(GedDictException.TECHNICAL.getMessage());
+		this.setStackTrace(exception.getStackTrace());
+	}
+	
 }

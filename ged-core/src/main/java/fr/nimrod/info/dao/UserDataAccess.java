@@ -5,8 +5,6 @@ import fr.nimrod.info.model.User;
 
 public interface UserDataAccess extends DataAccessObject<Long, User>{
 
-	void persistUser();
-	
 	User findUserByLogin(String login);
 	
 	static UserDataAccess getDataAccess(){

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import fr.nimrod.info.model.compte.StatutUser;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,7 +41,7 @@ public class User {
 	@Getter
 	@Setter
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long identifiant;
 	
 	@Getter
@@ -67,4 +68,18 @@ public class User {
 	@Setter
 	@Column(nullable=false)
 	private String hash;
+	
+	@Getter
+	@Setter
+	@Transient
+	private StatutUser statut;
+	
+	@Getter
+	@Setter
+	private boolean actif;
+	
+	@Getter
+	@Setter
+	@Column(name="nbrEssai", nullable=false)
+	private int nbrEssai = 0;
 }
