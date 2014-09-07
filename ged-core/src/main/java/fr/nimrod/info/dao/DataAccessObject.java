@@ -21,9 +21,9 @@ public interface DataAccessObject<PK, E> {
 
 	String getTypeEntity();
 
-	default EntityManager getEntityManager() {
-		return FACTORY.createEntityManager();
-	}
+//	default EntityManager getEntityManager() {
+//		return FACTORY.createEntityManager();
+//	}
 
 	@SuppressWarnings("unchecked")
 	default Class<E> getClassObject() {
@@ -43,13 +43,14 @@ public interface DataAccessObject<PK, E> {
 
 			return entity;
 		} catch (PersistenceException exception) {
-			exception.printStackTrace();
 			throw new GedTechnicalException(exception);
 		}
 	}
 
 	default E readEntity(PK id) {
-		return getEntityManager().find(getClassObject(), id);
+		@Cleanup
+		EntityManager entityManager = FACTORY.createEntityManager();
+		return entityManager.find(getClassObject(), id);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -61,20 +62,30 @@ public interface DataAccessObject<PK, E> {
 		return query.getResultList();
 	}
 
-	default E updateEntity(E entity) {
-		getEntityManager().getTransaction().begin();
-		entity = getEntityManager().merge(entity);
-		getEntityManager().getTransaction().commit();
-		return entity;
+	default E updateEntity(E entity) throws GedException {
+		try {
+			@Cleanup
+			EntityManager entityManager = FACTORY.createEntityManager();
+
+			entityManager.getTransaction().begin();
+			entity = entityManager.merge(entity);
+			entityManager.getTransaction().commit();
+			return entity;
+			
+		} catch (PersistenceException exception) {
+			throw new GedTechnicalException(exception);
+		}
 	}
 
 	default void deleteEntity(E entity) {
-		getEntityManager().getTransaction().begin();
-		getEntityManager().remove(entity);
-		getEntityManager().getTransaction().commit();
+		@Cleanup
+		EntityManager entityManager = FACTORY.createEntityManager();
+		entityManager.getTransaction().begin();
+		entityManager.remove(entity);
+		entityManager.getTransaction().commit();
 	}
 
-	default Query getQuery(String jpql) {
-		return getEntityManager().createQuery(jpql);
-	}
+//	default Query getQuery(String jpql) {
+//		return getEntityManager().createQuery(jpql);
+//	}
 }

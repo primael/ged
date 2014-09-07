@@ -14,6 +14,8 @@ public interface UserService {
 	
 	User createUser(String login, String eMail, String password) throws GedException;
 
+	User getUserByLogin(String login) throws GedException;
+	
 	static UserService getService(){
 		return UserServiceImplementation.INSTANCE;
 	}

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import fr.nimrod.info.dao.UserDaoTest;
 import fr.nimrod.info.exception.GedException;
+import fr.nimrod.info.exception.security.GedSecurityActionNotAllowedException;
 import fr.nimrod.info.exception.security.GedSecurityAuthenticationFailedException;
 import fr.nimrod.info.test.annotations.Data;
 import fr.nimrod.info.test.annotations.Schema;
@@ -27,6 +28,13 @@ public class UserServiceTest {
 	@Data(value = { "/fr/nimrod/info/dao/user/user.json" })
 	public void goodAuthenticate() throws GedException {
 		UserService.getService().authenticate("Nimrod", "aqwzsx123");
+	}
+	
+	@Test(expected=GedSecurityActionNotAllowedException.class)
+	@Schema({ "/fr/nimrod/info/dao/user/user.sql" })
+	@Data(value = { "/fr/nimrod/info/dao/user/user.json" })
+	public void badAuthenticateByInactiveUser() throws GedException {
+		UserService.getService().authenticate("l-infini", "aqwzsx123");
 	}
 	
 	@Test(expected=GedSecurityAuthenticationFailedException.class)

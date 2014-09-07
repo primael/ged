@@ -21,16 +21,6 @@ public class UserDaoTest {
 	
 	private UserDataAccess instanceUnderTest = UserDataAccess.getDataAccess();
 	
-	@Test
-	//@Schema({"/fr/nimrod/info/dao/user/user.sql"})
-	@Data(value = {"/fr/nimrod/info/dao/user/user.json"})
-	@DataExpected(file="/fr/nimrod/info/dao/user/user-expected.json", orderBy="identifiant", tableName="utilisateur", ignoredColumn={"hash", "salt", "identifiant"})
-	public void createUser() throws GedException {
-		User user = UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
-		user = UserDataAccess.getDataAccess().createEntity(user);
-		
-	} 
-	
 	@Test(expected=GedException.class)
 	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	public void createDuplicateMailUser() throws GedException {
@@ -39,7 +29,6 @@ public class UserDaoTest {
 		User badUser = UserService.getService().createUser("nimrod", "primaelbruant@gmail.com", "azerty");
 		//throw an exception
 		UserDataAccess.getDataAccess().createEntity(badUser);
-		
 	}
 	
 	@Test(expected=GedException.class)
@@ -69,7 +58,7 @@ public class UserDaoTest {
 	public void createUserWithNoSalt() throws GedException {
 		User user = UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		user.setSalt(null);
-		UserDataAccess.getDataAccess().createEntity(user);
+		UserDataAccess.getDataAccess().updateEntity(user);
 	}
 
 	@Test(expected=GedException.class)
@@ -77,7 +66,7 @@ public class UserDaoTest {
 	public void createUserWithNoHash() throws GedException {
 		User user = UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		user.setHash(null);
-		UserDataAccess.getDataAccess().createEntity(user);
+		UserDataAccess.getDataAccess().updateEntity(user);
 	}
 	
 	@Test
@@ -105,9 +94,8 @@ public class UserDaoTest {
 	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	@Data(value = {"/fr/nimrod/info/dao/user/user.json"})
 	@DataExpected(file="/fr/nimrod/info/dao/user/user-expected.json", tableName="utilisateur", orderBy="identifiant", ignoredColumn={"hash","salt","identifiant"} )
-	public void listUser() throws GedException{
-		User userToCreate = UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
-		userToCreate = UserDataAccess.getDataAccess().createEntity(userToCreate);
+	public void createUser() throws GedException{
+		UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		instanceUnderTest.readAllEntity().stream().forEach(user->System.out.println(user));
 	}
 }

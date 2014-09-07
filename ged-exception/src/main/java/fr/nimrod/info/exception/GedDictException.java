@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum GedDictException {
 
 	AUTHENTICATIONFAILED(100, "Erreur dans le couple login/mot de passe."),
+	ACTIONNOTALLOWED(101, "Vous n'êtes pas autorisé à executer cette action."),
 	
 	TECHNICAL(200, "Erreur technique survenue. Contactez l'administrateur.")
 	;

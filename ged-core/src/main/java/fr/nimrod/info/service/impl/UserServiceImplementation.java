@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import lombok.SneakyThrows;
 import fr.nimrod.info.dao.UserDataAccess;
+import fr.nimrod.info.exception.security.GedSecurityActionNotAllowedException;
 import fr.nimrod.info.exception.security.GedSecurityAuthenticationFailedException;
 import fr.nimrod.info.exception.technical.GedTechnicalException;
 import fr.nimrod.info.model.User;
@@ -32,14 +33,14 @@ public enum UserServiceImplementation implements UserService {
 		builder.with(SecurityOperations.LOGIN, login);
 		System.out.println(builder.getMessage());
 		boolean userExist = true;
-
+		
 		if (login == null || password == null) {
 			userExist = false;
 			login = "";
 			password = "";
 		}
 
-		User user = UserDataAccess.getDataAccess().findUserByLogin(login);
+		User user = getUserByLogin(login);
 
 		if (user == null) {
 			user = new User();
@@ -60,6 +61,15 @@ public enum UserServiceImplementation implements UserService {
 			System.out.println(builder2.getMessage());
 			throw new GedSecurityAuthenticationFailedException();
 		}
+		
+		if(!isAllowedToPerformAction(user)){
+			MessageBuilder builder4 = new SecurityMessageBuilder();
+			builder4.with(SecurityOperations.SECURITY_EVENT, user.getStatut() == StatutUser.COMPTEBLOQUER ? SecurityEvent.USER_BLOCKED : SecurityEvent.USER_INACTIVE);
+			builder4.with(SecurityOperations.LOGIN, login);
+			System.out.println(builder4.getMessage());
+			throw new GedSecurityActionNotAllowedException();
+		}
+		
 		MessageBuilder builder3 = new SecurityMessageBuilder();
 		builder3.with(SecurityOperations.SECURITY_EVENT, SecurityEvent.AUTHENTICATION_SUCCESS);
 		builder3.with(SecurityOperations.LOGIN, login);
@@ -98,4 +108,29 @@ public enum UserServiceImplementation implements UserService {
 		}
 	}
 
+	@Override
+	@SneakyThrows()
+	public User getUserByLogin(String login) {
+		User user = dao.findUserByLogin(login);
+		
+		//Enrichissement de l'utilisateur
+		if(user != null){
+			
+			if(user.isActif()) {
+				if(user.getNbrEssai() > 5) {
+					user.setStatut(StatutUser.COMPTEBLOQUER);
+				} else {
+					user.setStatut(StatutUser.COMPTEACTIF);
+				}
+			} else {
+				user.setStatut(StatutUser.COMPTEINACTIF);
+			}
+						
+		}
+		return user;
+	}
+	
+	private boolean isAllowedToPerformAction(User user){
+		return user.isActif() && user.getStatut() == StatutUser.COMPTEACTIF;
+	}
 }
