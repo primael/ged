@@ -26,3 +26,12 @@ Vous devez dans un premier temps déclarer dans votre test le @Rule Junit4:
 	@Rule
 	public NimrodDbRule dbUnitRule = new NimrodDbRule(__Class d'appel__, __Driver de la bdd___,
 			__URL de connexion__, __utilisateur__, __password__);
+```
+
+Ensuite sur vos méthode de test, ajouter les annotations :
+
+ - @Schema => Pour l'éxecution d'un script
+ - @Data => Pour l'insertion d'un jeu de données (supporte actuellement le format JSON et XML)
+ - @ExpectedData => Pour la vérification entre les données obtenues et les données attendues.
+ 
+Lancer votre test, that's it!
