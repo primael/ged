@@ -7,11 +7,16 @@
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 
+	<properties>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+	</properties>
+
 	<modules>
 		<module>trace</module>
 		<module>ged-test</module>
 		<module>ged-exception</module>
 		<module>ged-core</module>
+		<module>ged-credential</module>
 		<module>ged-ws</module>
   	</modules>
 

@@ -10,25 +10,51 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>fr.nimrod.info</groupId>
-	<artifactId>ged-ws</artifactId>
+	<artifactId>ged-credential</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>fr.nimrod.info</groupId>
-			<artifactId>ged-core</artifactId>
+			<artifactId>trace-core</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.12.6</version>
+			<groupId>fr.nimrod.info</groupId>
+			<artifactId>ged-exception</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.6.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>4.3.6.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.xml.ws</groupId>
 			<artifactId>jaxws-rt</artifactId>
 			<version>2.2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.3-1102-jdbc41</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.nimrod.info</groupId>
+			<artifactId>dbUnitTest</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -40,11 +66,12 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
 						<source>1.8</source>
-						<target>1.8</target>
+						<target>1.8</target> 
 						<encoding>ISO-8859-1</encoding>
 					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
+
 </project>
