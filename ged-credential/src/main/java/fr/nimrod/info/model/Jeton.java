@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,21 +41,12 @@ public class Jeton {
 	
 	@Getter
 	@Setter
-	@OneToOne
-	@JoinColumn(name="identifiant_utilisateur", nullable=false)
-	private User utilisateur;
-	
-	@Getter
-	@Setter
 	@Column(nullable=false)
 	private boolean actif = true;
 	
 	@Getter
 	@Convert(converter=ConverterLocalDateTime.class)
 	private LocalDateTime dateCreate = LocalDateTime.now();
-	
-	public Jeton(User utilisateur) {
-		this.utilisateur = utilisateur;
-	}
+
 	
 }

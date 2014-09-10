@@ -93,7 +93,7 @@ public class UserDaoTest {
 	@Test
 	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	@Data(value = {"/fr/nimrod/info/dao/user/user.json"})
-	@DataExpected(file="/fr/nimrod/info/dao/user/user-expected.json", tableName="utilisateur", orderBy="identifiant", ignoredColumn={"hash","salt","identifiant"} )
+	@DataExpected(file="/fr/nimrod/info/dao/user/user-expected.json", tableName="utilisateur", ignoredColumn={"hash","salt","identifiant"} )
 	public void createUser() throws GedException{
 		UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		instanceUnderTest.readAllEntity().stream().forEach(user->System.out.println(user));

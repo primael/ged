@@ -22,7 +22,6 @@ public class UserDaoTest {
 	private UserDataAccess instanceUnderTest = UserDataAccess.getDataAccess();
 	
 	@Test(expected=GedException.class)
-	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	public void createDuplicateMailUser() throws GedException {
 		User user = UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		UserDataAccess.getDataAccess().createEntity(user);
@@ -32,7 +31,6 @@ public class UserDaoTest {
 	}
 	
 	@Test(expected=GedException.class)
-	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	public void createDuplicateUser() throws GedException {
 		User user = UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		UserDataAccess.getDataAccess().createEntity(user);
@@ -43,7 +41,6 @@ public class UserDaoTest {
 	}
 
 	@Test(expected=GedException.class)
-	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	public void createDuplicateLoginUser() throws GedException {
 		User user = UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		UserDataAccess.getDataAccess().createEntity(user);
@@ -54,7 +51,6 @@ public class UserDaoTest {
 	}
 	
 	@Test(expected=GedException.class)
-	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	public void createUserWithNoSalt() throws GedException {
 		User user = UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		user.setSalt(null);
@@ -62,7 +58,6 @@ public class UserDaoTest {
 	}
 
 	@Test(expected=GedException.class)
-	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	public void createUserWithNoHash() throws GedException {
 		User user = UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		user.setHash(null);
@@ -70,7 +65,6 @@ public class UserDaoTest {
 	}
 	
 	@Test
-	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	@Data(value = {"/fr/nimrod/info/dao/user/user.json"} )
 	public void findUser(){
 		User user = instanceUnderTest.findUserByLogin("Nimrod");
@@ -93,7 +87,7 @@ public class UserDaoTest {
 	@Test
 	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
 	@Data(value = {"/fr/nimrod/info/dao/user/user.json"})
-	@DataExpected(file="/fr/nimrod/info/dao/user/user-expected.json", tableName="utilisateur", orderBy="identifiant", ignoredColumn={"hash","salt","identifiant"} )
+	@DataExpected(file="/fr/nimrod/info/dao/user/user-expected.json", tableName="utilisateur", ignoredColumn={"hash","salt","identifiant"} )
 	public void createUser() throws GedException{
 		UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");
 		instanceUnderTest.readAllEntity().stream().forEach(user->System.out.println(user));

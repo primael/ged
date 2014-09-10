@@ -24,7 +24,7 @@ public enum JetonServiceImplementation implements JetonService {
 		modifyToken(tokens);
 		
 		//On creer un nouveau jeton
-		Jeton token = new Jeton(user);
+		Jeton token = new Jeton();
 		//On le persiste
 		token = dao.createEntity(token);	
 		return token;
