@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ! (c) Copyright 2005-2011 JAXIO, www.jaxio.com ! Source code generated 
+	by Celerio, a Jaxio product ! Want to use Celerio within your company? email 
+	us at info@jaxio.com ! Follow us on twitter: @springfuse ! Template pack-jsf2-primefaces:src/main/webapp/WEB-INF/web.p.vm.xml -->
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!-- The master configuration file for this Spring web application -->
+	<!-- Context Configuration locations for Spring XML files -->
+
+	<listener>
+		<listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>WSServlet</servlet-name>
+		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>WSServlet</servlet-name>
+		<url-pattern>/security</url-pattern>
+	</servlet-mapping>
+</web-app>
