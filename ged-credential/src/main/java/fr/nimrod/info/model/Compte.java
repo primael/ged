@@ -12,12 +12,12 @@ import lombok.ToString;
 
 @Entity
 @ToString
-@Table(name="compte")
+@Table(name = "compte")
 public class Compte {
 
 	@Getter
 	@Setter
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long identifiant;
 }

@@ -13,7 +13,6 @@
 
 	<modules>
 		<module>trace</module>
-		<module>ged-test</module>
 		<module>ged-exception</module>
 		<module>ged-core</module>
 		<module>ged-credential</module>
