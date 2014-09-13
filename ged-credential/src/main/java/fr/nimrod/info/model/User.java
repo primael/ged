@@ -29,11 +29,11 @@ import lombok.ToString;
 @EqualsAndHashCode
 public class User {
 
-	public User(String login, String email, char[] password, String salt,
+	public User(String login, String email, String password, String salt,
 			String hash) {
 		this.login = login;
 		this.email = email;
-		this.password = password;
+		this.password = password.toCharArray();
 		this.salt = salt;
 		this.hash = hash;
 	}

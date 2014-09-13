@@ -90,7 +90,7 @@ public enum UserServiceImplementation implements UserService {
 				String stringDigest = byteToBase64(byteDigest);
 				String stringSalt = byteToBase64(byteSalt);
 				
-				User user = new User(login, eMail, password.toCharArray() , stringSalt, stringDigest);
+				User user = new User(login, eMail, password , stringSalt, stringDigest);
 				
 				//Par defaut le compte est inactif
 				

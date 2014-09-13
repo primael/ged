@@ -10,6 +10,7 @@ import fr.nimrod.info.model.User;
 import fr.nimrod.info.service.UserService;
 import fr.nimrod.info.test.annotations.Data;
 import fr.nimrod.info.test.annotations.DataExpected;
+import fr.nimrod.info.test.annotations.Datas;
 import fr.nimrod.info.test.annotations.Schema;
 import fr.nimrod.info.test.rule.NimrodDbRule;
 
@@ -71,7 +72,9 @@ public class UserDaoTest {
 	
 	@Test
 	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
-	@Data(value = {"/fr/nimrod/info/dao/user/user.json"} )
+	@Datas ({
+	@Data("/fr/nimrod/info/dao/user/user.json")
+	})
 	public void findUser(){
 		User user = instanceUnderTest.findUserByLogin("Nimrod");
 		
@@ -92,7 +95,9 @@ public class UserDaoTest {
 	
 	@Test
 	@Schema({"/fr/nimrod/info/dao/user/user.sql"})
-	@Data(value = {"/fr/nimrod/info/dao/user/user.json"})
+	@Datas({
+		@Data("/fr/nimrod/info/dao/user/user.json")
+	})
 	@DataExpected(file="/fr/nimrod/info/dao/user/user-expected.json", tableName="utilisateur", ignoredColumn={"hash","salt","identifiant"} )
 	public void createUser() throws GedException{
 		UserService.getService().createUser("primael", "primaelbruant@gmail.com", "azerty");

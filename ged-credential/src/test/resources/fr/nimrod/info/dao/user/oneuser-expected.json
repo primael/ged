@@ -1,0 +1,14 @@
+{
+  "utilisateur":
+      [
+         {
+          "identifiant": 1,
+          "login": "primael",
+          "email": "primaelbruant@gmail.com",
+          "salt": "1c4j4ACmchA=",
+          "hash": "5KtC1hCScIF+F7xpa2fCeDWzpcc=",
+          "actif": 0,
+          "nbrEssai" : 0
+        }
+      ]
+}
