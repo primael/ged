@@ -73,8 +73,8 @@ public abstract class MessageBuilder {
 
 	private enum CompulsorySecurityOperations implements ElementOperation {
 
-		TYPETRACE("type_trace", IntegerValidator.INSTANCE), TIMESTAMP(
-				"date_creation", TimeStampValidator.INSTANCE);
+		TYPETRACE("type_trace", IntegerValidator.INSTANCE), //
+		TIMESTAMP("date_creation", new TimeStampValidator(){});
 
 		private final String cle;
 		private final ElementValidator<?> elementValidator;

@@ -6,7 +6,7 @@ public class SecurityMessageBuilder extends MessageBuilder {
 
 	@Override
 	protected int getTypeTrace() {
-		return 100;
+		return 1;
 	}
 
 }

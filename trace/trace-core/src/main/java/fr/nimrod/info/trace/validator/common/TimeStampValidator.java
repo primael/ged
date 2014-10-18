@@ -5,12 +5,10 @@ import java.time.format.DateTimeFormatter;
 
 import fr.nimrod.info.trace.validator.ElementValidator;
 
-public enum TimeStampValidator implements ElementValidator<ChronoLocalDateTime<?>> {
-
-	INSTANCE;
+public interface TimeStampValidator extends ElementValidator<ChronoLocalDateTime<?>> {
 
 	@Override
-	public String validateAndTransform(Object... object) {
+	default String validateAndTransform(Object... object) {
 		String toReturn = null;
 		if (object == null || object[0] == null) {
 			toReturn = "*absent*";
@@ -25,11 +23,11 @@ public enum TimeStampValidator implements ElementValidator<ChronoLocalDateTime<?
 
 
 	@Override
-	public ChronoLocalDateTime<?> logToObject(String valeur) {
+	default ChronoLocalDateTime<?> logToObject(String valeur) {
 		return (ChronoLocalDateTime<?>) getDateTimeFormatter().parse(valeur);
 	}
 
-	private DateTimeFormatter getDateTimeFormatter() {
+	default DateTimeFormatter getDateTimeFormatter() {
 		return DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss.SSS");
 	}
 }

@@ -16,7 +16,9 @@ public class MessageBuilderTest {
 		
 		messageBuilder //
 			.with(SecurityOperations.TOKEN, UUID.randomUUID()) //
-			.with(SecurityOperations.TOKEN, ((Object[])null)) //
+			.with(SecurityOperations.LOGIN, ((Object[])null))
+			.with(SecurityOperations.LOGIN, "Primaël Bruant")
+			//.with(SecurityOperations.TOKEN, ((Object[])null)) //
 			.with(SecurityOperations.SECURITY_EVENT, SecurityEvent.TRY_AUTHENTICATION);
 		
 		String message = messageBuilder.getMessage();

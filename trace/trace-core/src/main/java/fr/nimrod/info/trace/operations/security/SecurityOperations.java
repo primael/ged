@@ -10,7 +10,7 @@ public enum SecurityOperations implements ElementOperation{
 
 	TOKEN("token", TokenValidator.INSTANCE),
 	SECURITY_EVENT("security_event", SecurityEventValidator.INSTANCE),
-	LOGIN("login", StringValidator.INSTANCE);
+	LOGIN("login", new StringValidator());
 	
 	private final String cle;
 	private final ElementValidator<?> elementValidator;

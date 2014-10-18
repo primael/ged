@@ -16,8 +16,7 @@
 		<module>trace</module>
 		<module>ged-exception</module>
 		<module>ged-core</module>
-		<module>ged-credential</module>
-		<module>ged-ws</module>
+		<module>ged-sso</module>
   	</modules>
 
 	<dependencies>
