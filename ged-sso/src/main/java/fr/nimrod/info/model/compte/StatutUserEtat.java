@@ -1,17 +1,19 @@
 package fr.nimrod.info.model.compte;
 
-public interface StatutUserEtat {
+import java.io.Serializable;
+
+public interface StatutUserEtat extends Serializable {
 
     default void ajouterEssai() {
-        throw new IllegalArgumentException("Un compte inactif ne peut pas d'essai de validation");
+        throw new IllegalStateException("Un compte inactif ne peut pas d'essai de validation");
     }
 
     default void validerEssai() {
-        throw new IllegalArgumentException("Un compte inactif ne peut pas d'essai de validation");
+        throw new IllegalStateException("Un compte inactif ne peut pas d'essai de validation");
     }
 
     default void activerCompte() {
-        throw new IllegalArgumentException("Un compte inactif ne peut pas d'essai de validation");
+        throw new IllegalStateException("Un compte inactif ne peut pas d'essai de validation");
     }
 
 }

@@ -3,7 +3,10 @@
  */
 package fr.nimrod.info.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +19,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+
+import fr.nimrod.info.dao.converter.PhoneNumberConverter;
 import fr.nimrod.info.model.compte.CompteInactif;
 import fr.nimrod.info.model.compte.StatutUserEtat;
 
@@ -28,7 +35,9 @@ import fr.nimrod.info.model.compte.StatutUserEtat;
 @Table(name = "utilisateur")
 @ToString
 @EqualsAndHashCode
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public User(String login, String email, char[] password, String salt, String hash) {
         this.login = login;
@@ -76,11 +85,15 @@ public class User {
 
     @Getter
     @Setter
-    private boolean actif;
+    private boolean actif = false;
 
     @Getter
     @Setter
     @Column(name = "nbrEssai", nullable = false)
     private int nbrEssai = 0;
-
+    
+    @Getter
+    @Setter
+    @Convert(converter = PhoneNumberConverter.class)
+    private PhoneNumber numeroTelephone;
 }

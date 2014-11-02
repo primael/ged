@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import lombok.Cleanup;
 import fr.nimrod.info.exception.GedException;
 import fr.nimrod.info.exception.technical.GedTechnicalException;
-import fr.nimrod.info.model.ActivationToken;
 
 @FunctionalInterface
 public interface DataAccessObject<PK, E> {

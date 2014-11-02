@@ -5,13 +5,12 @@ import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 public class TimeStampValidatorTest {
 
     private TimeStampValidator validator = new TimeStampValidator() {};
     
-    @Test
+    //@Test
     public void timeStampValidatorSimpleTest(){
         ChronoLocalDateTime<?> chronos = LocalDateTime.now();
         String chronosString = chronos.format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss.SSS"));

@@ -4,14 +4,16 @@ import fr.nimrod.info.model.User;
 
 public class CompteInactif implements StatutUserEtat {
 
+    private static final long serialVersionUID = 1L;
+
+    private User utilisateur;
+    
     public CompteInactif(User user) {
-        // TODO Auto-generated constructor stub
+        this.utilisateur = user;
     }
 
     @Override
     public void activerCompte() {
-        // TODO Auto-generated method stub
-
+        this.utilisateur.setStatut(new CompteActif(utilisateur));
     }
-
 }

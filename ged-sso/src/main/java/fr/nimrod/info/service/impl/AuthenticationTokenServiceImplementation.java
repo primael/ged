@@ -1,43 +1,50 @@
 package fr.nimrod.info.service.impl;
 
-import fr.nimrod.info.dao.AuthenticationDataAccess;
-import fr.nimrod.info.model.AuthenticateToken;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+
+import fr.nimrod.info.dao.TokenDataAccess;
+import fr.nimrod.info.exception.GedException;
+import fr.nimrod.info.model.AuthenticationToken;
 import fr.nimrod.info.model.User;
-import fr.nimrod.info.service.AuthenticationTokenService;
+import fr.nimrod.info.model.token.TypeToken;
+import fr.nimrod.info.service.abst.AbstractTokenService;
 import fr.nimrod.info.trace.builders.MessageBuilder;
 import fr.nimrod.info.trace.builders.security.SecurityMessageBuilder;
 import fr.nimrod.info.trace.evenement.SecurityEvent;
 import fr.nimrod.info.trace.operations.security.SecurityOperations;
 
-public enum AuthenticationTokenServiceImplementation implements AuthenticationTokenService {
+public class AuthenticationTokenServiceImplementation extends AbstractTokenService<AuthenticationToken> {
 
-    INSTANCE;
-
-    private AuthenticationDataAccess dataAccess = AuthenticationDataAccess.getDataAccess();
+    @SuppressWarnings("unchecked")
+    @Override
+    public TokenDataAccess<AuthenticationToken> getDao() {
+        return (TokenDataAccess<AuthenticationToken>) TokenDataAccess.getDataAccess(TypeToken.AUTHENTIFICATIONTOKEN);
+    }
 
     @Override
-    public String createAuthenticateToken(User user) {
-
-        final AuthenticateToken token = new AuthenticateToken(user);
+    public AuthenticationToken createToken(User utilisateur) throws GedException {
+        final AuthenticationToken token = new AuthenticationToken(utilisateur);
 
         MessageBuilder builder = new SecurityMessageBuilder();
         builder.with(SecurityOperations.TOKEN, token.getToken()) //
                 .with(SecurityOperations.SECURITY_EVENT, SecurityEvent.TOKEN_CREATION) //
-                .with(SecurityOperations.LOGIN, user.getLogin());
+                .with(SecurityOperations.LOGIN, utilisateur.getLogin());
 
         System.out.println(builder.getMessage());
 
         // On invalide les précédents
-        dataAccess.invalidateTokenFor(user);
+        this.getDao().invalidatePreviousTokens(utilisateur);
         // On persiste le nouveau token
-        dataAccess.persistToken(token);
+        this.getDao().createEntity(token);
 
-        return token.getToken().toString();
+        return token;
     }
 
     @Override
-    public boolean validateAuthenticateToken(String authenticateToken) {
-
-        return false;
+    protected Duration getDuration() {
+        return Duration.of(5, ChronoUnit.MINUTES);
     }
+
+    
 }

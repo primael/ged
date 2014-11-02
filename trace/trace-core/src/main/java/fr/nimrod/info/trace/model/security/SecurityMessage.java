@@ -11,7 +11,7 @@ import fr.nimrod.info.trace.model.Message;
  * Une trace de securité est une trace permettant de suivre les actions d'une session utilisateur.
  * La trace est composée comme suit:
  * <ul>
- * 	<li>un token de session. Identifiant de façon unique une session utilisateur.></li>
+ * 	<li>un token de session. Identifiant de façon unique une session utilisateur.</li>
  * 	<li>un timestamp de création de trace.</li>
  * 	<li>un identifiant. Permettant d'identifier l'utilisateur.</li>
  * 	<li>une action. Permettant d'identifier l'action effectuée.</li>

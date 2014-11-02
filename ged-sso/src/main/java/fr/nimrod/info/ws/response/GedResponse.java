@@ -20,9 +20,21 @@ public abstract class GedResponse implements Serializable {
     @Getter
     @Setter
     private String message = "OK";
+ 
+    @Getter
+    @Setter
+    private String stackTrace = "";
 
     public void addException(GedException exception) {
         this.setCodeRetour(exception.getCodeRetour());
         this.setMessage(exception.getMessage());
+        
+        String trace = "";
+        
+        for(StackTraceElement element : exception.getStackTrace()){
+            trace += element.toString();
+        }
+        
+        this.setStackTrace(trace);
     }
 }

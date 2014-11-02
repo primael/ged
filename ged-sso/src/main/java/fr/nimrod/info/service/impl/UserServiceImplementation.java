@@ -7,13 +7,13 @@ import java.util.Arrays;
 import lombok.SneakyThrows;
 import fr.nimrod.info.dao.UserDataAccess;
 import fr.nimrod.info.exception.security.GedSecurityActionNotAllowedException;
+import fr.nimrod.info.exception.security.GedSecurityAuthenticationAttributeAllReadyExistsException;
 import fr.nimrod.info.exception.security.GedSecurityAuthenticationFailedException;
 import fr.nimrod.info.exception.technical.GedTechnicalException;
 import fr.nimrod.info.model.User;
 import fr.nimrod.info.model.compte.CompteActif;
 import fr.nimrod.info.model.compte.CompteBloquer;
 import fr.nimrod.info.model.compte.CompteInactif;
-import fr.nimrod.info.model.compte.StatutUserEtat;
 import fr.nimrod.info.service.UserService;
 import fr.nimrod.info.trace.builders.MessageBuilder;
 import fr.nimrod.info.trace.builders.security.SecurityMessageBuilder;
@@ -21,8 +21,9 @@ import fr.nimrod.info.trace.evenement.SecurityEvent;
 import fr.nimrod.info.trace.operations.security.SecurityOperations;
 
 /**
- * Service permettant la gestion des utilisateurs.
- * Ce service permet l'authentification, la création et la recherche d'un utilisateur.
+ * Service permettant la gestion des utilisateurs. Ce service permet l'authentification, la création et la recherche
+ * d'un utilisateur.
+ * 
  * @author Primael BRUANT
  *
  */
@@ -94,8 +95,18 @@ public enum UserServiceImplementation implements UserService {
     @SneakyThrows()
     public User createUser(final String login, final String eMail, String password) {
         // FIXME ajouter des contrôles de format?
-        if (login != null && password != null) {
+        if (login != null && password != null && eMail != null) {
             try {
+
+                // On recherche l'utilisateur par login
+                if (dao.findUserByLogin(login) != null) {
+                    throw new GedSecurityAuthenticationAttributeAllReadyExistsException("login");
+                }
+                // puis par mail
+                if (dao.findUserByMail(eMail) != null) {
+                    throw new GedSecurityAuthenticationAttributeAllReadyExistsException("eMail");
+                }
+                
                 SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
                 byte[] byteSalt = new byte[8];
                 random.nextBytes(byteSalt);
@@ -107,13 +118,12 @@ public enum UserServiceImplementation implements UserService {
                 User user = new User(login, eMail, password.toCharArray(), stringSalt, stringDigest);
 
                 // Par defaut le compte est inactif
-
                 user.setActif(false);
-                
-                //user.setStatut(StatutUserEtat.COMPTEINACTIF);
+
+                // user.setStatut(StatutUserEtat.COMPTEINACTIF);
 
                 user = dao.createEntity(user);
-                
+
                 return user;
             } catch (NoSuchAlgorithmException e) {
                 throw new GedTechnicalException();

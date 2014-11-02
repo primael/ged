@@ -4,6 +4,8 @@ import fr.nimrod.info.model.User;
 
 public class CompteActif implements StatutUserEtat {
 
+    private static final long serialVersionUID = 1L;
+
     private User user;
 
     public CompteActif(User user) {

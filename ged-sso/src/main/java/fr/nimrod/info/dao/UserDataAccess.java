@@ -7,6 +7,8 @@ public interface UserDataAccess extends DataAccessObject<Long, User> {
 
     User findUserByLogin(String login);
 
+    User findUserByMail(String mail);
+    
     static UserDataAccess getDataAccess() {
         return UserDataAccessImplementation.INSTANCE;
     }
